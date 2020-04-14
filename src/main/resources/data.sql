@@ -1,0 +1,1 @@
+MERGE INTO `role`(id, role_id, role) KEY (role_id) VALUES (1, 1,'USER');
