@@ -34,18 +34,18 @@ public class TweetController {
     String filter, Model model) {
     	User loggedInUser = userService.getLoggedInUser();
         List<TweetDisplay> tweets = new ArrayList<>();
-    	//List<TweetDisplay> tweets = tweetService.findAll();
-        if (filter == null) {
-            filter = "all";
-        }
-        if (filter.equalsIgnoreCase("following")) {
-            List<User> following = loggedInUser.getFollowing();
-            tweets = tweetService.findAllByUsers(following);
-            model.addAttribute("filter", "following");
-        }else {
-            tweets = tweetService.findAll();
-            model.addAttribute("filter", "all");
-        }
+//    	List<TweetDisplay> tweets = tweetService.findAll();
+//        if (filter == null) {
+//            filter = "all";
+//        }
+//        if (filter.equalsIgnoreCase("following")) {
+        List<User> following = loggedInUser.getFollowing();
+        tweets = tweetService.findAllByUsers(following);
+        model.addAttribute("filter", "following");
+//        }else {
+//            tweets = tweetService.findAll();
+//            model.addAttribute("filter", "all");
+//        }
     	model.addAttribute("tweetList", tweets);
         return "feed";
     }

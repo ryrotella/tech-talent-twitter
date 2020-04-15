@@ -11,12 +11,13 @@
 	<span th:text="${user.lastName}"></span> - <span style="color: #00aced">@<span th:text="${user.username}"></span></span></h2>
     <h5>Joined <span th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span></h5>
     
-   <!--  <form th:action="@{/follow/} + ${user.username}" th:if="${!following && !isSelfPage}" method="post">
+  <form th:action="@{/follow/} + ${user.username}" th:if="${!following && !isSelfPage}" method="post">
     	<button style="float:right" type="Submit" class="btn btn-lg btn-success">Follow</button>
 	</form>
-	<form th:action="@{/unfollow/} + ${user.username}" th:if="${following} && !isSelfPage" method="post">
+	<form th:action="@{/unfollow/} + ${user.username}" th:if="${following && !isSelfPage}" method="post">
     	<button style="float:right" type="Submit" class="btn btn-lg btn-primary unfollow_btn">Following</button>
-	</form> -->
+	</form> 
+	
     <h3>Tweets</h3>	
     <div class="list-group" th:each="tweet:${tweetList}">
         <div class="list-group-item list-group-item-action">
@@ -34,5 +35,7 @@
     
     
   	</div>
+  	    <div th:replace="fragments/head :: bodyFragment"></div>
+  	
 </body>
 </html>

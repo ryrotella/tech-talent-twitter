@@ -9,16 +9,17 @@
     <div class="container">
     <div th:replace="fragments/navbar"></div>
     <ul class="nav nav-tabs">
-    <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
-        <a href="/tweets">All</a></li>
-    <li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
-        <a href="/tweets?filter=following">Following</a></li>
+    <!-- <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
+        <a href="/tweets">All</a></li> -->
+   <!--  <li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
+        <a href="/tweets?filter=following">Following</a></li> -->
 </ul><br/>
         <h2>Tweets</h2>
         <div class="list-group">
         	
         		<div th:each="tweet:${tweetList}" class="list-group-item">
-            		<h5>@<span th:text="${tweet.user.username}"></span>
+            		<a class="username" th:href="@{/users/} + ${tweet.user.username}">
+            		<h5>@<span th:text="${tweet.user.username}"></span></a>
             		<small th:text="${tweet.date}"></small>
             		</h5>
             		<p th:utext="${tweet.message}"></p>
@@ -32,5 +33,7 @@
     		<h3>No tweets have been created by your followers</h3>
 		</div> -->
     </div>
+  <div th:replace="fragments/head :: bodyFragment"></div>
+    
 </body>
 </html>

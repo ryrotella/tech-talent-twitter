@@ -43,7 +43,7 @@ public class AuthorizationController {
 	        model.addAttribute("user", new User());
 	        
 	    }
-	    redirectAttributes.addFlashAttribute("message", "Success");
+	    redirectAttributes.addFlashAttribute("message", "New account created successfully");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 	    return "redirect:/signup";
 	}

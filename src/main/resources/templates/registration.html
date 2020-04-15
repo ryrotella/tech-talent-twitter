@@ -37,6 +37,8 @@
     </div>
     <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}">
     </div>
-    <button class="btn btn-md btn-success btn-block" th:if="${message}" onclick="window.location.href = '../login';">Back to Login</button>
+    <button class="btn btn-success btn-block" th:if="${message}" onclick="window.location.href = '../login';">Back to Login</button>
+      	    <div th:replace="fragments/head :: bodyFragment"></div>
+    
 </body>
 </html>

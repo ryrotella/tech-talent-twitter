@@ -31,68 +31,69 @@ public class UserController {
 	    List<TweetDisplay> tweets = tweetService.findAllByUser(user);
 	    model.addAttribute("tweetList", tweets);
 	    model.addAttribute("user", user);
-//	    User loggedInUser = userService.getLoggedInUser();
-//	    List<User> following = loggedInUser.getFollowing();
-//	    boolean isFollowing = false;
-//	    for (User followedUser : following) {
-//	        if (followedUser.getUsername().equals(username)) {
-//	            isFollowing = true;
-//	        }
-//	    }
-//	    model.addAttribute("following", isFollowing);
-//	    boolean isSelfPage = loggedInUser.getUsername().equals(username);
-//	    model.addAttribute("isSelfPage", isSelfPage);
+	    User loggedInUser = userService.getLoggedInUser();
+	    List<User> following = loggedInUser.getFollowing();
+	    boolean isFollowing = false;
+	    for (User followedUser : following) {
+	        if (followedUser.getUsername().equals(username)) {
+	            isFollowing = true;
+	        }
+	    }
+	    model.addAttribute("following", isFollowing);
+	    boolean isSelfPage = loggedInUser.getUsername().equals(username);
+	    model.addAttribute("isSelfPage", isSelfPage);
 	    return "user";
 	}
 	
-//	private void SetTweetCounts(List<User> users, Model model) {
-//	    HashMap<String,Integer> tweetCounts = new HashMap<>();
-//	    for (User user : users) {
-//	        List<TweetDisplay> tweets = tweetService.findAllByUser(user);
-//	        tweetCounts.put(user.getUsername(), tweets.size());
-//	    }
-//	    model.addAttribute("tweetCounts", tweetCounts);
-//	}
+	private void SetTweetCounts(List<User> users, Model model) {
+	    HashMap<String,Integer> tweetCounts = new HashMap<>();
+	    for (User user : users) {
+	        List<TweetDisplay> tweets = tweetService.findAllByUser(user);
+	        tweetCounts.put(user.getUsername(), tweets.size());
+	    }
+	    model.addAttribute("tweetCounts", tweetCounts);
+	}
 //	
-//	private void SetFollowingStatus(List<User> users, List<User> usersFollowing, Model model) {
-//	    HashMap<String,Boolean> followingStatus = new HashMap<>();
-//	    String username = userService.getLoggedInUser().getUsername();
-//	    for (User user : users) {
-//	        if(usersFollowing.contains(user)) {
-//	            followingStatus.put(user.getUsername(), true);
-//	        }else if (!user.getUsername().equals(username)) {
-//	            followingStatus.put(user.getUsername(), false);
-//	    	}
-//	    }
-//	    model.addAttribute("followingStatus", followingStatus);
-//	}
+	private void SetFollowingStatus(List<User> users, List<User> usersFollowing, Model model) {
+	    HashMap<String,Boolean> followingStatus = new HashMap<>();
+	    String username = userService.getLoggedInUser().getUsername();
+	    for (User user : users) {
+	        if(usersFollowing.contains(user)) {
+	            followingStatus.put(user.getUsername(), true);
+	        }else if (!user.getUsername().equals(username)) {
+	            followingStatus.put(user.getUsername(), false);
+	    	}
+	    }
+	    model.addAttribute("followingStatus", followingStatus);
+	}
 //	
-//	@GetMapping(value = "/users")
-//	public String getUsers(@RequestParam(value="filter", required=false) 
-//    String filter, Model model) {
+	@GetMapping(value = "/users")
+	public String getUsers(@RequestParam(value="filter", required=false) 
+    String filter, Model model) {
 //		List<User> users = new ArrayList<User>();
-//		User loggedInUser = userService.getLoggedInUser();
-//	    List<User> usersFollowing = loggedInUser.getFollowing();
-//	    List<User> usersFollowers = loggedInUser.getFollowers();
-//	    //List<User> users = userService.findAll();
-//	    if (filter == null) {
-//	        filter = "all";
-//	    }
-//	    if (filter.equalsIgnoreCase("followers")) {
-//	        users = usersFollowers;
-//	        model.addAttribute("filter", "followers");
-//	    } else if (filter.equalsIgnoreCase("following")) {
-//	        users = usersFollowing;
-//	        model.addAttribute("filter", "following");
-//	    } else {
-//	        users = userService.findAll();
-//	        model.addAttribute("filter", "all");
-//	    }
-//	    model.addAttribute("users", users);
-//	    SetTweetCounts(users, model);
-//	    SetFollowingStatus(users, usersFollowing, model);
-//	    return "users";
-//	}
+		User loggedInUser = userService.getLoggedInUser();
+	    List<User> usersFollowing = loggedInUser.getFollowing();
+	    List<User> usersFollowers = loggedInUser.getFollowers();
+	    List<User> users = userService.findAll();
+	    if (filter == null) {
+	        filter = "all";
+	    }
+	    if (filter.equalsIgnoreCase("followers")) {
+	        users = usersFollowers;
+	        model.addAttribute("filter", "followers");
+	    } else if (filter.equalsIgnoreCase("following")) {
+	        users = usersFollowing;
+	        model.addAttribute("filter", "following");
+	    } else {
+	        users = userService.findAll();
+	        model.addAttribute("filter", "all");
+	    }
+	    model.addAttribute("users", users);
+	    SetTweetCounts(users, model);
+	    SetFollowingStatus(users, usersFollowing, model);
+	    return "users";
+	}
 	
+
 
 }
