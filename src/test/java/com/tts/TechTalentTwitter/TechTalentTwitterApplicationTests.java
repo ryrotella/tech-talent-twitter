@@ -8,6 +8,8 @@ class TechTalentTwitterApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
+		//Ryan made change on 10/15/2020
 	}
 
 }
